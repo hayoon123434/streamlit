@@ -110,7 +110,7 @@ def show_home():
                 del st.session_state[key]
             st.rerun()
 
-    st.write(f"👤 **{st.session_state['username']}** 님, 반갑습니다!")
+    st.write(f"**{st.session_state['username']}** 님, 반갑습니다!")
     st.markdown("---")
 
     st.write(
@@ -118,7 +118,7 @@ def show_home():
     )
 
     st.info(
-        "📌 **퀴즈 안내**\n\n"
+        "**퀴즈 안내**\n\n"
         "- 총 10문제, 문제당 10점 (만점 100점)\n"
         "- 문제를 선택한 뒤 **정답 확인** 버튼을 눌러 진행하세요\n"
         "- 각 문제를 마칠 때마다 점수와 해설을 확인할 수 있습니다"
