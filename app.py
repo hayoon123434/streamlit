@@ -6,8 +6,7 @@ import time
 # 페이지 설정 (소개 및 기본 세팅 자료 참고)
 # -------------------------------------------------------
 st.set_page_config(
-    page_title="🎬 영화/드라마 퀴즈",
-    page_icon="🎬",
+    page_title="영화/드라마 퀴즈",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
@@ -66,7 +65,7 @@ def show_login():
     st.caption("학번: 2025404021　|　이름: 양하윤")
     st.markdown("---")
 
-    st.title("🎬 영화/드라마 상식 퀴즈")
+    st.title("영화/드라마 퀴즈")
     st.write("로그인 후 퀴즈를 시작할 수 있습니다.")
 
     st.markdown("---")
@@ -83,7 +82,7 @@ def show_login():
             # 로그인 성공 → session_state 업데이트 (세션 상태 관리 자료 참고)
             st.session_state['logged_in'] = True
             st.session_state['username'] = username
-            st.success(f"환영합니다, {username}님! 🎉")
+            st.success(f"환영합니다, {username}님!")
             time.sleep(0.7)
             st.rerun()
         else:
@@ -102,7 +101,7 @@ def show_home():
 
     col1, col2 = st.columns([4, 1])
     with col1:
-        st.title("🎬 영화/드라마 상식 퀴즈")
+        st.title("영화/드라마 퀴즈")
     with col2:
         st.write("")
         if st.button("로그아웃"):
@@ -115,21 +114,19 @@ def show_home():
     st.markdown("---")
 
     st.write(
-        "한국 영화/드라마와 할리우드 명작까지! "
-        "당신의 영화 지식을 테스트해 보세요 🍿"
+        "당신의 영화/드라마 지식을 테스트해 보세요"
     )
 
     st.info(
         "📌 **퀴즈 안내**\n\n"
         "- 총 10문제, 문제당 10점 (만점 100점)\n"
-        "- 4지 선다형 객관식\n"
         "- 문제를 선택한 뒤 **정답 확인** 버튼을 눌러 진행하세요\n"
-        "- 모든 문제를 마치면 점수와 해설을 확인할 수 있습니다"
+        "- 각 문제를 마칠 때마다 점수와 해설을 확인할 수 있습니다"
     )
 
     st.markdown("---")
 
-    if st.button("퀴즈 시작하기 🎬", type="primary", use_container_width=True):
+    if st.button("퀴즈 시작하기", type="primary", use_container_width=True):
         st.session_state['quiz_started'] = True
         st.session_state['current_q'] = 0
         st.session_state['score'] = 0
@@ -188,7 +185,7 @@ def show_quiz():
             st.success(f"✅ 정답! **{correct_ans}**")
         else:
             st.error(f"❌ 오답입니다. 내가 고른 답: **{user_ans}**")
-            st.info(f"💡 정답은 **{correct_ans}** 입니다.")
+            st.info(f"정답은 **{correct_ans}** 입니다.")
 
         # 해설 (기본 컴포넌트 자료 참고 - expander 활용)
         with st.expander("해설 보기"):
@@ -201,7 +198,7 @@ def show_quiz():
                 st.session_state['current_q'] += 1
                 st.rerun()
         else:
-            if st.button("최종 결과 보기 🏆", type="primary", use_container_width=True):
+            if st.button("최종 점수 보기", type="primary", use_container_width=True):
                 st.session_state['quiz_done'] = True
                 st.rerun()
 
@@ -219,7 +216,7 @@ def show_result():
     st.caption("학번: 2025404021　|　이름: 양하윤")
     st.markdown("---")
 
-    st.title("🏆 퀴즈 결과")
+    st.title("퀴즈 결과")
     st.markdown("---")
 
     # 점수 표시 (metric - 실전 응용 자료 참고)
@@ -232,21 +229,21 @@ def show_result():
 
     # 등급 메시지
     if score == 100:
-        st.success("🥇 완벽해요! 진짜 영화/드라마 마니아시네요!")
+        st.success("완벽해요!")
         st.balloons()
     elif score >= 80:
-        st.success("🥈 훌륭해요! 꽤 많이 알고 계시네요 😄")
+        st.success("훌륭해요!")
     elif score >= 60:
-        st.info("🥉 나쁘지 않아요! 조금만 더 보면 완벽할 것 같아요 🎬")
+        st.info("나쁘지 않아요!")
     elif score >= 40:
-        st.warning("😅 더 많은 영화/드라마를 즐겨보세요!")
+        st.warning("더 많은 영화/드라마를 즐겨보세요!")
     else:
-        st.error("😢 아직 갈 길이 멀었어요... 넷플릭스를 켜세요!")
+        st.error("다른 퀴즈에서는 더 힘내시길 바라요!")
 
     st.markdown("---")
 
     # 문제별 결과 정리
-    st.subheader("📋 문제별 결과")
+    st.subheader("문제별 결과")
     for i, q in enumerate(quiz_data):
         user_ans = answers[i] if i < len(answers) else "(미응답)"
         correct_ans = q["answer"]
@@ -265,7 +262,7 @@ def show_result():
 
     col_a, col_b = st.columns(2)
     with col_a:
-        if st.button("다시 풀기 🔄", type="primary", use_container_width=True):
+        if st.button("다시 풀기", type="primary", use_container_width=True):
             st.session_state['quiz_started'] = True
             st.session_state['current_q'] = 0
             st.session_state['score'] = 0
@@ -273,7 +270,7 @@ def show_result():
             st.session_state['quiz_done'] = False
             st.rerun()
     with col_b:
-        if st.button("홈으로 🏠", use_container_width=True):
+        if st.button("홈으로", use_container_width=True):
             st.session_state['quiz_started'] = False
             st.session_state['current_q'] = 0
             st.session_state['score'] = 0
